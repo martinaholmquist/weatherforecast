@@ -1,0 +1,61 @@
+[ {
+  "id" : "c86da2b2-e921-412a-b896-282f641413e8",
+  "date" : [ 2020, 1, 1 ],
+  "hour" : [ 21, 0 ],
+  "temperature" : 5.7,
+  "created" : null,
+  "longitude" : 0.0,
+  "latitude" : 0.0,
+  "precipitation" : false,
+  "provider" : null
+}, {
+  "id" : "4264cded-eab2-47c4-ab05-e32da8327677",
+  "date" : [ 1981, 1, 27 ],
+  "hour" : [ 12, 31 ],
+  "temperature" : 25.8,
+  "created" : null,
+  "longitude" : 0.0,
+  "latitude" : 0.0,
+  "precipitation" : false,
+  "provider" : null
+}, {
+  "id" : "7c6489ef-271c-47ec-9deb-f6f3ad4e3eb6",
+  "date" : [ 2018, 3, 1 ],
+  "hour" : [ 6, 5 ],
+  "temperature" : 16.8,
+  "created" : null,
+  "longitude" : 0.0,
+  "latitude" : 0.0,
+  "precipitation" : false,
+  "provider" : null
+}, {
+  "id" : "f7dbb93b-f9aa-4282-90e8-a7df11111111",
+  "date" : [ 1981, 1, 1 ],
+  "hour" : [ 2, 2, 2 ],
+  "temperature" : 200.0,
+  "created" : null,
+  "longitude" : 0.0,
+  "latitude" : 0.0,
+  "precipitation" : false,
+  "provider" : null
+}, {
+  "id" : "f7dbb93b-f9aa-4282-90e8-a7df11111111",
+  "date" : [ 1981, 1, 1 ],
+  "hour" : [ 2, 2, 2 ],
+  "temperature" : 200.0,
+  "created" : null,
+  "longitude" : 0.0,
+  "latitude" : 0.0,
+  "precipitation" : false,
+  "provider" : null
+}, {
+  "id" : "3a50ae4d-91eb-417f-be27-dbab488e4d0f",
+  "date" : [ 1981, 1, 1 ],
+  "hour" : [ 2, 2, 2 ],
+  "temperature" : 200.0,
+  "created" : null,
+  "longitude" : 0.0,
+  "latitude" : 0.0,
+  "precipitation" : false,
+  "provider" : null
+} ]

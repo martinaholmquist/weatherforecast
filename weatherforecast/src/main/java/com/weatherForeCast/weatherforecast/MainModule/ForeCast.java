@@ -51,7 +51,7 @@ public class ForeCast {
 
 
 
-    //tom construktor
+
     public ForeCast() {
     }
 

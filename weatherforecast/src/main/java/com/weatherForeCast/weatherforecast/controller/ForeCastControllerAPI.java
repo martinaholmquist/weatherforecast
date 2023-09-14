@@ -72,7 +72,7 @@ public class ForeCastControllerAPI {
     }
 
 
-    //PUT med DTO
+    //PUT med DTO MM
     @PutMapping("/api/forecasts/{id}")
     public ResponseEntity<ViewForeCastDTO> update(@PathVariable UUID id, @RequestBody ViewForeCastDTO updatedForeCast) throws IOException {
 

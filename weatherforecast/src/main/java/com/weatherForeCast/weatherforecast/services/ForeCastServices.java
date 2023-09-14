@@ -109,7 +109,7 @@ public class ForeCastServices {
     }
 
 
-    //TESTAR ATT HA DEM HÄR ISTÄLLET
+    //TESTAR ATT HA DEM HÄR ISTÄLLET får se om det ska ändras
 
     public List<AverageDTO> getAverageByDateDTO(LocalDate selectedDateOfAverage) {
         List<ForeCast> averageForecast = AverageAllDataBase(selectedDateOfAverage);

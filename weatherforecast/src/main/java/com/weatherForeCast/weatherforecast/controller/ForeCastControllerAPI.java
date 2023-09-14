@@ -83,6 +83,7 @@ public class ForeCastControllerAPI {
             foreCast.setTemperature(updatedForeCast.getTemperature());
             foreCast.setProvider(updatedForeCast.getProvider());
             foreCast.setPrecipitation(updatedForeCast.isPrecipitation());
+
             foreCastServices.updateWithDTO(foreCast);
 
             ViewForeCastDTO responseDTO = new ViewForeCastDTO(

@@ -1,6 +1,7 @@
 package com.weatherForeCast.weatherforecast.MainModule;
 
 import com.weatherForeCast.weatherforecast.provider.WeatherProvider;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,15 +15,12 @@ public class ForeCast {
     @GeneratedValue(strategy = GenerationType.AUTO)  //auto eller uuid
     private UUID id;
     private LocalDate date;
+    @Schema(type = "String", pattern = "HH:mm:SS")
     private LocalTime hour;
     private float temperature;
 
-    //nya
-
     @GeneratedValue(strategy = GenerationType.AUTO)
     private LocalDateTime created;
-
-
 
     @Column(nullable = true)
     private float longitude;
@@ -30,7 +28,6 @@ public class ForeCast {
     private float latitude;
     @Column(nullable = true)
     private boolean precipitation;
-
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)

@@ -5,7 +5,6 @@ import com.weatherForeCast.weatherforecast.dto.AverageDTO;
 import com.weatherForeCast.weatherforecast.dto.ViewForeCastDTO;
 import com.weatherForeCast.weatherforecast.provider.WeatherProvider;
 import com.weatherForeCast.weatherforecast.services.ForeCastServices;
-import com.weatherForeCast.weatherforecast.services.userAdministrationServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,14 +25,14 @@ public class ForeCastControllerAPI {
     @Autowired
     ForeCastServices foreCastServices;
 
+    /*
     @Autowired
-    userAdministrationServices userAdministrationServices;
+    userAdministrationServices userAdministrationServices;*/
 
 
     //JOBBAR MED DTO
     @GetMapping("/api/average/{selectedDate}")
     public ResponseEntity<List<AverageDTO>> getAverageDTO(@PathVariable("selectedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate) throws IOException {
-       // List<AverageDTO> resultAverageDTOList = userAdministrationServices.getAverageByDateDTO(selectedDate);  //ORIGINAL INNAN FLYTT
         List<AverageDTO> resultAverageDTOList = foreCastServices.getAverageByDateDTO(selectedDate);
 
         if (!resultAverageDTOList.isEmpty()) {
@@ -49,7 +49,6 @@ public class ForeCastControllerAPI {
             @PathVariable("selectedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate) throws IOException {
 
         WeatherProvider provider = WeatherProvider.valueOf(providerString.toUpperCase());
-        //List<AverageDTO> resultAverageDTOList = userAdministrationServices.getAverageFromWhatEverIsTypedInDTO(selectedDate, provider);  //original innan flytt
         List<AverageDTO> resultAverageDTOList = foreCastServices.getAverageFromWhatEverIsTypedInDTO(selectedDate, provider);
 
         if (!resultAverageDTOList.isEmpty()) {
@@ -76,37 +75,33 @@ public class ForeCastControllerAPI {
     //PUT med DTO
     @PutMapping("/api/forecasts/{id}")
     public ResponseEntity<ViewForeCastDTO> update(@PathVariable UUID id, @RequestBody ViewForeCastDTO updatedForeCast) throws IOException {
-        var foreCast = new ForeCast();
-        foreCast.setId(id);
-        foreCast.setDate(updatedForeCast.getDate());
-        foreCast.setHour(updatedForeCast.getHour());
-        foreCast.setTemperature(updatedForeCast.getTemperature());
-        foreCast.setProvider(updatedForeCast.getProvider());
-        foreCast.setPrecipitation(updatedForeCast.isPrecipitation());
 
-        foreCastServices.updateWithDTO(foreCast);
+        try {
+            var foreCast = foreCastServices.get(id).get();
+            foreCast.setDate(updatedForeCast.getDate());
+            foreCast.setHour(updatedForeCast.getHour());
+            foreCast.setTemperature(updatedForeCast.getTemperature());
+            foreCast.setProvider(updatedForeCast.getProvider());
+            foreCast.setPrecipitation(updatedForeCast.isPrecipitation());
+            foreCastServices.updateWithDTO(foreCast);
 
+            ViewForeCastDTO responseDTO = new ViewForeCastDTO(
+                    updatedForeCast.getDate(),
+                    updatedForeCast.getHour(),
+                    updatedForeCast.getTemperature(),
+                    updatedForeCast.isPrecipitation(),
+                    updatedForeCast.getProvider()
+            );
 
-        ViewForeCastDTO responseDTO = new ViewForeCastDTO(
-                updatedForeCast.getDate(),
-                updatedForeCast.getHour(),
-                updatedForeCast.getTemperature(),
-                updatedForeCast.isPrecipitation(),
-                updatedForeCast.getProvider()
-
-        );
-
-        return ResponseEntity.ok(responseDTO);
+            return ResponseEntity.ok(responseDTO);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
 
 
-/*  testar med DTO på denna istället
-    @GetMapping("/api/forecasts") //funkar via thunder
-    public ResponseEntity<List<ForeCast>> GetAll() throws IOException {
-        return new ResponseEntity<>(forecastRepositorytoAPI.findAllOrdered(), HttpStatus.OK);
-    }*/
 
 
     //övriga
@@ -118,7 +113,7 @@ public class ForeCastControllerAPI {
         return new ResponseEntity<ForeCast>(createdForecast, HttpStatus.CREATED);
     }
 
-    @GetMapping("/api/forecasts/{id}")  //Funkar via thunder   Notera formatet på ID i urlen i thunderclient
+    @GetMapping("/api/forecasts/{id}")
     public ResponseEntity<ForeCast> Get(@PathVariable UUID id) throws IOException {
         Optional<ForeCast> ForeCastSingle = foreCastServices.get(id);
         if (ForeCastSingle.isPresent()) return ResponseEntity.ok(ForeCastSingle.get());
@@ -126,19 +121,7 @@ public class ForeCastControllerAPI {
     }
 
 
-/*   original
-    @PutMapping("/api/forecasts/{id}")  //Funkar via thunder   Notera formatet på ID i urlen i thunderclient
-    public ResponseEntity<ForeCast> Update(@PathVariable UUID id, @RequestBody ForeCast ForeCastSingle) throws IOException {
-        foreCastServices.update(ForeCastSingle);
-        return ResponseEntity.ok(ForeCastSingle);
-    }*/
-
-
-
-
-
     @DeleteMapping("/api/forecasts/{id}")
-    //denna bör uppdateras med en typ isActive or not!!! Funkar via thunder   Notera formatet på ID i urlen i thunderclient http://localhost:8080/api/forecasts/6cb22a7f-c9fd-4f69-9d6d-fe55dc40f2ab
     public ResponseEntity<String> deleteProduct(@PathVariable UUID id) throws IOException {
         foreCastServices.deleteWeather(id);
         return ResponseEntity.ok("Deleted");

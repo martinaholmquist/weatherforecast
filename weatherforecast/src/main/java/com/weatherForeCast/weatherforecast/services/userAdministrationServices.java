@@ -28,7 +28,7 @@ import java.util.*;
 @Service
 public class userAdministrationServices {
 
-    @Autowired  //containern gör en abstraction som gör att det new:ar per automatik
+    @Autowired  //containern gör en abstraction som gör att det new:ar per automatiskt
     ForeCastServices foreCastServices;
 
 

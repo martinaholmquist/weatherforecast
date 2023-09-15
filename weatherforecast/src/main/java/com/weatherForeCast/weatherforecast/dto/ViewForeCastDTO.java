@@ -5,11 +5,12 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 
+public class ViewForeCastDTO {  //DataTransferObject
 
-public class ViewForeCastDTO {  //DataTransferObject  jobbar bara med egenskaper från en plats till en annan
-
+    private UUID id;
     private LocalDate date;
     private LocalTime hour;
     private float temperature;
@@ -18,12 +19,21 @@ public class ViewForeCastDTO {  //DataTransferObject  jobbar bara med egenskaper
     private WeatherProvider provider;
 
 
-    public ViewForeCastDTO(LocalDate date, LocalTime hour, float temperature, boolean precipitation, WeatherProvider provider) {
+    public ViewForeCastDTO(UUID id, LocalDate date, LocalTime hour, float temperature, boolean precipitation, WeatherProvider provider) {
+        this.id = id;
         this.date = date;
         this.hour = hour;
         this.temperature = temperature;
         this.precipitation = precipitation;
         this.provider = provider;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {

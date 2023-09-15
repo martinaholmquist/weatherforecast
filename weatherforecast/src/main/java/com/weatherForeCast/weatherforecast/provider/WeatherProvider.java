@@ -2,6 +2,13 @@ package com.weatherForeCast.weatherforecast.provider;
 
 
 public enum WeatherProvider {
+
+    SMHI(),
+    MET(),
+    USER()
+
+
+    /* här använder jag int
     SMHI(1),
     MET(2),
     USER(3);
@@ -24,5 +31,5 @@ public enum WeatherProvider {
             }
         }
         throw new IllegalArgumentException("Invalid WeatherProvider value: " + value);
-    }
+    }*/
 }

@@ -2,8 +2,7 @@ package com.weatherForeCast.weatherforecast.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.Map;
+
 
 
 public class AverageDTO {

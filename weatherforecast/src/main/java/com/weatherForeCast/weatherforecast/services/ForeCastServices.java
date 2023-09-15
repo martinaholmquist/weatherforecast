@@ -24,13 +24,6 @@ public class ForeCastServices {
         forecastRepository.save(foreCastFromUser);
     }
 
-
-    //ANVÄNDS EJ
-    public List<ForeCast> getForeCastsTest() throws IOException {
-        return forecastRepository.findAll();
-    }
-
-
     public List<ForeCast> getForeCasts() throws IOException {
         List<ForeCast> orderedForecasts = forecastRepository.findAllOrdered();
         return orderedForecasts;
@@ -47,7 +40,6 @@ public class ForeCastServices {
     public void updateForecastByTemperature(UUID forecastId, float newTemperature) {
         forecastRepository.updateTemperatureById(forecastId, newTemperature);
     }
-
 
     public void deleteWeather(UUID id) {
         forecastRepository.deleteById(id);
@@ -112,7 +104,7 @@ public class ForeCastServices {
         for (ForeCast forecast : averageForecast) {
             LocalTime hour = forecast.getHour();
 
-            // Check if this hour has already been processed
+            // kolla om timmen är gjord
             if (!checktHours.contains(hour)) {
                 float totalTemperature = 0;
                 int count = 0;
@@ -153,12 +145,13 @@ public class ForeCastServices {
 
 
         for (ForeCast forecast : allForeCastsInDB) {
+            UUID id = forecast.getId();
             LocalTime hour = forecast.getHour();
             LocalDate date = forecast.getDate();
             float temperature = forecast.getTemperature();
             boolean precipitation = forecast.isPrecipitation();
             WeatherProvider provider = forecast.getProvider();
-            result.add(new ViewForeCastDTO(date, hour, temperature, precipitation,provider ));
+            result.add(new ViewForeCastDTO(id, date, hour, temperature, precipitation,provider ));
         }
         return result;
     }
@@ -175,5 +168,13 @@ public class ForeCastServices {
     public Optional<ForeCast> get(UUID id) throws IOException {  //används vid get via api fetch 8080
         return getForeCasts().stream().filter(forecast->forecast.getId().equals(id)).findFirst();
     }
+
+
+    /*
+     //ANVÄNDS EJ
+    public List<ForeCast> getForeCastsTest() throws IOException {
+        return forecastRepository.findAll();
+    }
+     */
 
 }

@@ -28,7 +28,7 @@ public class ForeCastControllerAPI {
 
 
     // DTO
-    @GetMapping("/api/average/{selectedDate}")
+    @GetMapping("/api/forecasts/average/{selectedDate}")
     public ResponseEntity<List<AverageDTO>> getAverageDTO(@PathVariable("selectedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate) {
         List<AverageDTO> resultAverageDTOList = foreCastServices.getAverageByDateDTO(selectedDate);
 
@@ -40,7 +40,7 @@ public class ForeCastControllerAPI {
     }
 
 
-    @GetMapping("/api/average/{selectedProvider}/{selectedDate}")
+    @GetMapping("/api/forecasts/average/{selectedProvider}/{selectedDate}")
     public ResponseEntity<List<AverageDTO>> getAverageFromWhatEverIsTypedInDTO(
             @PathVariable("selectedProvider") String providerString,
             @PathVariable("selectedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate selectedDate) {

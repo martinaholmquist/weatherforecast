@@ -14,8 +14,8 @@ The application offers the following features:
 5. **Update a Weather Forecast**: Allows users to update an existing weather forecast.
 6. **Delete a Weather Forecast**: Enables the removal of a weather forecast from the database.
 7. **Get Average Temperature**: Calculates and displays the average temperature for a selected day. You can retrieve the average temperature for a specific date by using the following endpoints:
-    - `GET /api/average/{selectedDate}`: Retrieves the average temperature for the selected date from all weather forecast providers in the database.
-    - `GET /api/average/{selectedProvider}/{selectedDate}`: Retrieves the average temperature for the selected date from a specific weather forecast provider (e.g., SMHI, MET) in the database.
+    - `GET /api/forecasts/average/{selectedDate}`: Retrieves the average temperature for the selected date from all weather forecast providers in the database.
+    - `GET /api/forecasts/average/{selectedProvider}/{selectedDate}`: Retrieves the average temperature for the selected date from a specific weather forecast provider (e.g., SMHI, MET) in the database.
    The average temperature is calculated based on the available data for the selected date and is displayed with hourly granularity.
 
 
@@ -23,8 +23,8 @@ The application offers the following features:
 
 The project provides an API with the following endpoints:
 
-- `GET /api/average/{selectedDate}`: Retrieves the average temperature for a given day.
-- `GET /api/average/{selectedProvider}/{selectedDate}`: Retrieves the average temperature from a specific weather forecast provider for a particular day.
+- `GET /api/forecasts/average/{selectedDate}`: Retrieves the average temperature for a given day.
+- `GET /api/forecasts/average/{selectedProvider}/{selectedDate}`: Retrieves the average temperature from a specific weather forecast provider for a particular day.
 - `GET /api/forecasts`: Retrieves a list of all weather forecasts.
 - `PUT /api/forecasts/{id}`: Updates a weather forecast with the specified ID.
 - `POST /api/forecasts`: Creates a new weather forecast.

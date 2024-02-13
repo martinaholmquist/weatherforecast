@@ -28,9 +28,12 @@ import java.util.*;
 @Service
 public class userAdministrationServices {
 
-    @Autowired  //containern gör en abstraction som gör att det new:ar per automatiskt
-    ForeCastServices foreCastServices;
 
+    private final ForeCastServices foreCastServices;
+
+    public userAdministrationServices(ForeCastServices foreCastServices) {
+        this.foreCastServices = foreCastServices;
+    }
 
     public void menu() throws IOException {
         Scanner scan = new Scanner(System.in);
@@ -286,6 +289,10 @@ public class userAdministrationServices {
 
         return hour;
     }
+
+
+
+
     private float getTemperatureFromUser() {
         Scanner scan = new Scanner(System.in);
         float temperature = 0;

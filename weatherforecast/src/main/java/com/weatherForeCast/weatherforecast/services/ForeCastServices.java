@@ -15,10 +15,12 @@ import java.util.*;
 @Service
 public class ForeCastServices {
 
-    @Autowired  //containern gör en abstraction som gör att det new:ar per automatik   Lagt till denna för refaktor av classer
-    private ForecastRepository forecastRepository;
 
+    private final ForecastRepository forecastRepository;
 
+    public ForeCastServices(ForecastRepository forecastRepository) {
+        this.forecastRepository = forecastRepository;
+    }
 
     public void updateWithDTO(ForeCast foreCastFromUser) throws IOException {
         forecastRepository.save(foreCastFromUser);

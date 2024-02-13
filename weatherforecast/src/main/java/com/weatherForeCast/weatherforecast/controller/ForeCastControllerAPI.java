@@ -5,7 +5,6 @@ import com.weatherForeCast.weatherforecast.dto.AverageDTO;
 import com.weatherForeCast.weatherforecast.dto.ViewForeCastDTO;
 import com.weatherForeCast.weatherforecast.provider.WeatherProvider;
 import com.weatherForeCast.weatherforecast.services.ForeCastServices;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +21,12 @@ import java.util.UUID;
 @RestController
 public class ForeCastControllerAPI {
 
-    @Autowired
-    ForeCastServices foreCastServices;
 
+    private final ForeCastServices foreCastServices;
 
+    public ForeCastControllerAPI(ForeCastServices foreCastServices) {
+        this.foreCastServices = foreCastServices;
+    }
 
     // DTO
     @GetMapping("/api/forecasts/average/{selectedDate}")
